@@ -18,7 +18,44 @@ class Bank:
     except Exception as err:
         print(f"an exception occured as {err}")
     
-     
+    @classmethod
+    def __update(cls): #static method he hum nhi chahte ki sb log yhi use kren
+        with open(cls.database,'w') as fs:
+            fs.write(json.dumps(Bank.data))
+
+    @classmethod
+    def __accountgenerate(cls):  #account number generate hoga yha
+        alpha = random.choices(string.ascii_letters,k = 3)
+        num = random.choices(string.digits,k= 3)
+        spchar = random.choices("!@#$%^&*",k = 1)
+        id = alpha + num + spchar
+        random.shuffle(id)
+        return "".join(id)  #string me chahieye account number
+
+
+
+    def Createaccount(self):  #account create krne ke liye kya chaheiye
+        info = {
+            "name": input("Tell your name :- "),
+            "age" : int(input("tell your age :- ")),
+            "email": input("tell your email :- "),
+            "pin": int(input("tell your 4 number pin :- ")),
+            "accountNo." : Bank.__accountgenerate(),
+            "balance" : 0
+        }
+        if info['age'] < 18  or len(str(info['pin'])) != 4:
+            print("sorry you cannot create your account")
+        else:
+            print("account has been created successfully")   #account create ho gya he ab data.json me daal denge
+            for i in info:  #data key value pair me he hota he
+                print(f"{i} : {info[i]}")
+            print("please note down your account number")
+
+            Bank.data.append(info)  #data.json me data ko daal diya he
+
+            Bank.__update()
+        
+
             
 
 user = Bank()
@@ -33,18 +70,3 @@ check = int(input("tell your response :- "))
 
 if check == 1:
     user.Createaccount()
-
-if check == 2:
-    user.depositmoney()
-
-if check == 3:
-    user.withdrawmoney()
-
-if check == 4:
-    user.showdetails()
-
-if check == 5:
-    user.updatedetails()
-
-if check == 6:
-    user.Delete()
