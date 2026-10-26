@@ -73,7 +73,10 @@ class Bank:
                 userdata[0]['balance'] += amount
                 Bank.__update()
                 print("Amount deposited successfully ")
-            
+
+
+    def withdrawmoney(self):
+                print("Amount withdrew successfully ") 
 
 user = Bank()
 print("press 1 for creating an account")
@@ -87,7 +90,7 @@ check = int(input("tell your response :- "))
 
 if check == 1:
     user.Createaccount()
-    
+
 if check == 2:
     user.depositmoney()
 
