@@ -150,6 +150,24 @@ class Bank:
             Bank.__update()
             print("details updated successfully")
 
+
+    def Delete(self):
+        accnumber = input("please tell your account number ")
+        pin = int(input("please tell your pin aswell "))
+
+        userdata = [i for i in Bank.data if i['accountNo.'] == accnumber and i['pin'] == pin]
+
+        if userdata == False:
+            print("sorry no such data exist ")
+        else:
+            check = input("press y if you actually want to delete the account or press n")
+            if check == 'n' or check == "N":
+                print("bypassed")
+            else:
+                index = Bank.data.index(userdata[0])
+                Bank.data.pop(index)
+                print("account deleted successfully ")
+                Bank.__update()
 user = Bank()
 print("press 1 for creating an account")
 print("press 2 for Deposititing the money in the bank ")
