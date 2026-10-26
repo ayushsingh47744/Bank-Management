@@ -76,7 +76,34 @@ class Bank:
 
 
     def withdrawmoney(self):
+        accnumber = input("please tell your account number ")
+        pin = int(input("please tell your pin aswell "))
+
+        userdata = [i for i in Bank.data if i['accountNo.'] == accnumber and i['pin'] == pin]
+
+        if userdata == False:
+            print("soory no data found")
+        
+        else:
+            amount = int(input("how much you want to withdraw "))
+            if userdata[0]['balance']  < amount:
+                print("soory you dont have that much money")
+              
+            else:
+                
+                userdata[0]['balance'] -= amount
+                Bank.__update()
                 print("Amount withdrew successfully ") 
+
+    def showdetails(self):
+
+        accnumber = input("please tell your account number ")
+        pin = int(input("please tell your pin aswell "))
+
+        userdata = [i for i in Bank.data if i['accountNo.'] == accnumber and i['pin'] == pin]
+        print("your information are \n\n\n")
+        for i in userdata[0]:
+            print(f"{i} : {userdata[0][i]}")
 
 user = Bank()
 print("press 1 for creating an account")
